@@ -2,7 +2,7 @@ import React from 'react';
 
 const Box = () => {
     const container = {
-        border: '1px solid grey',
+        border: '2px solid #818384',
     };
     return <div style={container}></div>;
 };

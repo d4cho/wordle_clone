@@ -3,7 +3,6 @@ import Row from '../Molecules/Row';
 
 const WordGrid = () => {
     const container = {
-        border: '1px solid red',
         padding: '120px 0',
     };
 
