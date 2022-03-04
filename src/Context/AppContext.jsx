@@ -10,7 +10,8 @@ export const useAppContext = () => {
 export const AppContextProvider = ({ children }) => {
     const [wordToGuess, setWordToGuess] = useState('crane');
     const [myGuess, setMyGuess] = useState('');
-    const [currentGuess, setCurrentGuess] = useState(1);
+    const [currentRow, setCurrentRow] = useState(1);
+    const [previousGuesses, setPreviousGuesses] = useState([]);
 
     const keyPressed = useKeyPress();
 
@@ -32,9 +33,10 @@ export const AppContextProvider = ({ children }) => {
     };
 
     const handleEnter = () => {
-        if (myGuess.length === 5 && currentGuess < 7) {
+        if (myGuess.length === 5 && currentRow < 7) {
+            setPreviousGuesses([...previousGuesses, myGuess]);
             setMyGuess('');
-            setCurrentGuess(currentGuess + 1);
+            setCurrentRow(currentRow + 1);
         }
     };
 
@@ -45,11 +47,19 @@ export const AppContextProvider = ({ children }) => {
         }
     };
 
-    console.log(myGuess);
-    console.log(currentGuess);
-
     return (
-        <AppContext.Provider value={{ wordToGuess, setWordToGuess, myGuess, setMyGuess }}>
+        <AppContext.Provider
+            value={{
+                wordToGuess,
+                setWordToGuess,
+                myGuess,
+                setMyGuess,
+                currentRow,
+                setCurrentRow,
+                previousGuesses,
+                setPreviousGuesses,
+            }}
+        >
             {children}
         </AppContext.Provider>
     );

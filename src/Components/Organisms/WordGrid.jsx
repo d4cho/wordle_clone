@@ -20,12 +20,12 @@ const WordGrid = () => {
     return (
         <div style={container}>
             <div style={gridContainer}>
-                <Row />
-                <Row />
-                <Row />
-                <Row />
-                <Row />
-                <Row />
+                <Row rowNum={1} />
+                <Row rowNum={2} />
+                <Row rowNum={3} />
+                <Row rowNum={4} />
+                <Row rowNum={5} />
+                <Row rowNum={6} />
             </div>
         </div>
     );
