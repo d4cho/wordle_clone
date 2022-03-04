@@ -1,20 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import Box from '../Atoms/Box';
 import { useAppContext } from '../../Context/AppContext';
 
 const Row = (props) => {
     const { rowNum } = props;
-    const { keyPressed, myGuess, currentRow, previousGuesses } = useAppContext();
-    const [isInvalid, setIsInvalid] = useState(false);
-
-    useEffect(() => {
-        if (keyPressed === 'Enter' && myGuess.length < 5) {
-            setIsInvalid(true);
-            setTimeout(() => {
-                setIsInvalid(false);
-            }, 500);
-        }
-    }, [keyPressed]);
+    const { isInvalid, myGuess, currentRow, previousGuesses } = useAppContext();
 
     let word = rowNum === currentRow ? myGuess : previousGuesses[rowNum - 1];
 

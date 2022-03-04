@@ -1,9 +1,12 @@
 import React from 'react';
 import Row from '../Molecules/Row';
+import { useAppContext } from '../../Context/AppContext';
 
 const WordGrid = () => {
+    const { isInvalid } = useAppContext();
     const container = {
-        padding: '120px 0',
+        padding: '180px 0',
+        position: 'relative',
     };
 
     const gridContainer = {
@@ -17,8 +20,27 @@ const WordGrid = () => {
         rowGap: '5px',
     };
 
+    const absolute = {
+        position: 'absolute',
+        top: '7%',
+        left: '50%',
+        transform: 'translate(-50%, 0)',
+        border: '1px solid white',
+        padding: '20px 20px',
+        borderRadius: '5px',
+        color: 'black',
+        backgroundColor: 'white',
+        fontWeight: 'bold',
+        fontSize: 18,
+    };
+
     return (
         <div style={container}>
+            {isInvalid && (
+                <div className='invalid-fade-out' style={absolute}>
+                    Not enough letters
+                </div>
+            )}
             <div style={gridContainer}>
                 <Row rowNum={1} />
                 <Row rowNum={2} />

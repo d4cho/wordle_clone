@@ -12,6 +12,7 @@ export const AppContextProvider = ({ children }) => {
     const [myGuess, setMyGuess] = useState('');
     const [currentRow, setCurrentRow] = useState(1);
     const [previousGuesses, setPreviousGuesses] = useState([]);
+    const [isInvalid, setIsInvalid] = useState(false);
 
     const keyPressed = useKeyPress();
 
@@ -38,6 +39,13 @@ export const AppContextProvider = ({ children }) => {
             setMyGuess('');
             setCurrentRow(currentRow + 1);
         }
+
+        if (myGuess.length < 5) {
+            setIsInvalid(true);
+            setTimeout(() => {
+                setIsInvalid(false);
+            }, 1000);
+        }
     };
 
     const handleAlphabet = () => {
@@ -58,7 +66,7 @@ export const AppContextProvider = ({ children }) => {
                 setCurrentRow,
                 previousGuesses,
                 setPreviousGuesses,
-                keyPressed,
+                isInvalid,
             }}
         >
             {children}
