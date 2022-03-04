@@ -58,6 +58,7 @@ export const AppContextProvider = ({ children }) => {
                 setCurrentRow,
                 previousGuesses,
                 setPreviousGuesses,
+                keyPressed,
             }}
         >
             {children}

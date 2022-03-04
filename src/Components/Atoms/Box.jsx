@@ -8,6 +8,7 @@ const Box = (props) => {
     };
 
     const absolute = {
+        // to center absolute box
         position: 'absolute',
         top: '50%',
         left: '50%',
@@ -18,10 +19,12 @@ const Box = (props) => {
         fontWeight: 'bold',
         userSelect: 'none',
 
+        // to center text in box
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
 
+        // for animation
         border: letter ? '2px solid #565758' : '2px solid #3a3a3c',
         width: '100%',
         height: '100%',
