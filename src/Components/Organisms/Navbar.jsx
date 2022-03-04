@@ -21,13 +21,13 @@ const Navbar = () => {
     return (
         <div style={flexContainer}>
             <div style={flexStyle}>
-                <div>=</div>
-                <div>?</div>
+                <div>icon</div>
+                <div>icon</div>
             </div>
             <div style={title}>Wordle</div>
             <div style={flexStyle}>
-                <div>stats</div>
-                <div>settings</div>
+                <div>icon</div>
+                <div>icon</div>
             </div>
         </div>
     );
