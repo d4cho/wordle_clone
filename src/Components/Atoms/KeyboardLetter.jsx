@@ -1,16 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { useAppContext } from '../../Context/AppContext';
 
-const COLORS = {
-    default: '#818384',
-    yellow: '#B59F3B',
-    green: '#538D4E',
-    dark: '#3A3A3C',
-};
-
 const KeyboardLetter = (props) => {
     const { letter } = props;
-    const { previousGuesses, wordToGuess } = useAppContext();
+    const { previousGuesses, wordToGuess, colors } = useAppContext();
     const [bgColor, setBgColor] = useState('default');
 
     useEffect(() => {
@@ -38,7 +31,7 @@ const KeyboardLetter = (props) => {
     }, [previousGuesses]);
 
     const itemStyle = {
-        backgroundColor: COLORS[bgColor],
+        backgroundColor: colors[bgColor],
         textTransform: 'uppercase',
         fontWeight: 'bold',
         textAlign: 'center',

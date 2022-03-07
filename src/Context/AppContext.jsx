@@ -13,6 +13,12 @@ export const AppContextProvider = ({ children }) => {
     const [currentRow, setCurrentRow] = useState(1);
     const [previousGuesses, setPreviousGuesses] = useState([]);
     const [isInvalid, setIsInvalid] = useState(false);
+    const [colors, setColors] = useState({
+        default: '#818384',
+        yellow: '#B59F3B',
+        green: '#538D4E',
+        dark: '#3A3A3C',
+    });
 
     const keyPressed = useKeyPress();
 
@@ -67,6 +73,8 @@ export const AppContextProvider = ({ children }) => {
                 previousGuesses,
                 setPreviousGuesses,
                 isInvalid,
+                colors,
+                setColors,
             }}
         >
             {children}
