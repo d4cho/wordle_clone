@@ -1,4 +1,5 @@
 import React from 'react';
+import KeyboardLetter from '../Atoms/KeyboardLetter';
 
 const KeyboardLayout = () => {
     const gridContainer = {
@@ -48,37 +49,37 @@ const KeyboardLayout = () => {
         <div>
             <div style={gridContainer}>
                 <div style={row1Container}>
-                    <div style={item}>q</div>
-                    <div style={item}>w</div>
-                    <div style={item}>e</div>
-                    <div style={item}>r</div>
-                    <div style={item}>t</div>
-                    <div style={item}>y</div>
-                    <div style={item}>u</div>
-                    <div style={item}>i</div>
-                    <div style={item}>o</div>
-                    <div style={item}>p</div>
+                    <KeyboardLetter letter={'q'} />
+                    <KeyboardLetter letter={'w'} />
+                    <KeyboardLetter letter={'e'} />
+                    <KeyboardLetter letter={'r'} />
+                    <KeyboardLetter letter={'t'} />
+                    <KeyboardLetter letter={'y'} />
+                    <KeyboardLetter letter={'u'} />
+                    <KeyboardLetter letter={'i'} />
+                    <KeyboardLetter letter={'o'} />
+                    <KeyboardLetter letter={'p'} />
                 </div>
                 <div style={row2Container}>
-                    <div style={item}>a</div>
-                    <div style={item}>s</div>
-                    <div style={item}>d</div>
-                    <div style={item}>f</div>
-                    <div style={item}>g</div>
-                    <div style={item}>h</div>
-                    <div style={item}>j</div>
-                    <div style={item}>k</div>
-                    <div style={item}>l</div>
+                    <KeyboardLetter letter={'a'} />
+                    <KeyboardLetter letter={'s'} />
+                    <KeyboardLetter letter={'d'} />
+                    <KeyboardLetter letter={'f'} />
+                    <KeyboardLetter letter={'g'} />
+                    <KeyboardLetter letter={'h'} />
+                    <KeyboardLetter letter={'j'} />
+                    <KeyboardLetter letter={'k'} />
+                    <KeyboardLetter letter={'l'} />
                 </div>
                 <div style={row3Container}>
                     <div style={item}>ENTER</div>
-                    <div style={item}>z</div>
-                    <div style={item}>x</div>
-                    <div style={item}>c</div>
-                    <div style={item}>v</div>
-                    <div style={item}>b</div>
-                    <div style={item}>n</div>
-                    <div style={item}>m</div>
+                    <KeyboardLetter letter={'z'} />
+                    <KeyboardLetter letter={'x'} />
+                    <KeyboardLetter letter={'c'} />
+                    <KeyboardLetter letter={'v'} />
+                    <KeyboardLetter letter={'b'} />
+                    <KeyboardLetter letter={'n'} />
+                    <KeyboardLetter letter={'m'} />
                     <div style={item}>{'<=='}</div>
                 </div>
             </div>

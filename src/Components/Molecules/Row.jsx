@@ -8,8 +8,6 @@ const Row = (props) => {
 
     let word = rowNum === currentRow ? myGuess : previousGuesses[rowNum - 1];
 
-    console.log(currentRow);
-
     const row = {
         display: 'grid',
         gridTemplateColumns: 'repeat(5, 1fr)',
