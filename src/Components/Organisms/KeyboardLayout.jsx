@@ -1,5 +1,6 @@
 import React from 'react';
 import KeyboardLetter from '../Atoms/KeyboardLetter';
+import BackspaceIcon from '@mui/icons-material/Backspace';
 
 const KeyboardLayout = () => {
     const gridContainer = {
@@ -45,6 +46,18 @@ const KeyboardLayout = () => {
         userSelect: 'none',
     };
 
+    const backspace = {
+        backgroundColor: '#818384',
+        textTransform: 'uppercase',
+        fontWeight: 'bold',
+        borderRadius: '5px',
+        cursor: 'pointer',
+        userSelect: 'none',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+    };
+
     return (
         <div>
             <div style={gridContainer}>
@@ -80,7 +93,9 @@ const KeyboardLayout = () => {
                     <KeyboardLetter letter={'b'} />
                     <KeyboardLetter letter={'n'} />
                     <KeyboardLetter letter={'m'} />
-                    <div style={item}>{'<=='}</div>
+                    <div style={backspace}>
+                        <BackspaceIcon sx={{ fontSize: 35 }} />
+                    </div>
                 </div>
             </div>
         </div>
