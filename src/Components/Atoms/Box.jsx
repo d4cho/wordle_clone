@@ -22,10 +22,6 @@ const Box = (props) => {
 
     const absolute = {
         // to center absolute box
-        // position: 'absolute',
-        // top: '50%',
-        // left: '50%',
-        // transform: 'translate(-50%, -50%)',
         color: '#FFFFFF',
         fontSize: 40,
         textTransform: 'uppercase',
@@ -43,10 +39,11 @@ const Box = (props) => {
         height: '100%',
     };
 
-    const anim = {
+    const flipAndBgColorAnim = {
         animationDelay: animDelay,
         backgroundColor: previousGuesses[rowNum] ? colors[bgColor] : null,
-        transition: 'background-color 2s',
+        border: previousGuesses[rowNum] ? `2px solid ${colors[bgColor]}` : null,
+        transition: 'background-color 2s, border 2s',
         transitionDelay: animDelay,
     };
 
@@ -56,7 +53,7 @@ const Box = (props) => {
                 className={
                     previousGuesses[rowNum] ? 'guess-entered' : letter ? 'letter-entered' : null
                 }
-                style={previousGuesses[rowNum] ? { ...absolute, ...anim } : absolute}
+                style={previousGuesses[rowNum] ? { ...absolute, ...flipAndBgColorAnim } : absolute}
             >
                 {letter}
             </div>
