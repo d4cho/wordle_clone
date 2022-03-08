@@ -10,7 +10,7 @@ export const useAppContext = () => {
 export const AppContextProvider = ({ children }) => {
     const [wordToGuess, setWordToGuess] = useState('crane');
     const [myGuess, setMyGuess] = useState('');
-    const [currentRow, setCurrentRow] = useState(1);
+    const [currentRow, setCurrentRow] = useState(0);
     const [previousGuesses, setPreviousGuesses] = useState([]);
     const [isInvalid, setIsInvalid] = useState(false);
     const [colors, setColors] = useState({

@@ -1,7 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useAppContext } from '../../Context/AppContext';
 
 const Box = (props) => {
-    const { letter } = props;
+    const { letter, position, rowNum } = props;
+    const { previousGuesses, wordToGuess, colors } = useAppContext();
+    const [bgColor, setBgColor] = useState('default');
+
+    useEffect(() => {
+        if (letter === wordToGuess[position]) {
+            setBgColor('green');
+        } else if (wordToGuess.includes(letter)) {
+            setBgColor('yellow');
+        } else {
+            setBgColor('dark');
+        }
+    }, [previousGuesses]);
 
     const container = {
         position: 'relative',
@@ -18,6 +31,7 @@ const Box = (props) => {
         textTransform: 'uppercase',
         fontWeight: 'bold',
         userSelect: 'none',
+        backgroundColor: previousGuesses[rowNum] ? colors[bgColor] : null,
 
         // to center text in box
         display: 'flex',

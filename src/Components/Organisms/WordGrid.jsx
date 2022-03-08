@@ -42,12 +42,12 @@ const WordGrid = () => {
                 </div>
             )}
             <div style={gridContainer}>
+                <Row rowNum={0} />
                 <Row rowNum={1} />
                 <Row rowNum={2} />
                 <Row rowNum={3} />
                 <Row rowNum={4} />
                 <Row rowNum={5} />
-                <Row rowNum={6} />
             </div>
         </div>
     );

@@ -6,7 +6,7 @@ const Row = (props) => {
     const { rowNum } = props;
     const { isInvalid, myGuess, currentRow, previousGuesses } = useAppContext();
 
-    let word = rowNum === currentRow ? myGuess : previousGuesses[rowNum - 1];
+    let word = rowNum === currentRow ? myGuess : previousGuesses[rowNum];
 
     const row = {
         display: 'grid',
@@ -17,11 +17,11 @@ const Row = (props) => {
 
     return (
         <div className={isInvalid && rowNum === currentRow ? 'shake' : null} style={row}>
-            <Box letter={word ? word[0] : null} />
-            <Box letter={word ? word[1] : null} />
-            <Box letter={word ? word[2] : null} />
-            <Box letter={word ? word[3] : null} />
-            <Box letter={word ? word[4] : null} />
+            <Box letter={word ? word[0] : null} position={0} rowNum={rowNum} />
+            <Box letter={word ? word[1] : null} position={1} rowNum={rowNum} />
+            <Box letter={word ? word[2] : null} position={2} rowNum={rowNum} />
+            <Box letter={word ? word[3] : null} position={3} rowNum={rowNum} />
+            <Box letter={word ? word[4] : null} position={4} rowNum={rowNum} />
         </div>
     );
 };
