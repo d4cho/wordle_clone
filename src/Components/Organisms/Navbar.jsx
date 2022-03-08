@@ -1,4 +1,8 @@
 import React from 'react';
+import MenuIcon from '@mui/icons-material/Menu';
+import HelpOutlineOutlinedIcon from '@mui/icons-material/HelpOutlineOutlined';
+import LeaderboardOutlinedIcon from '@mui/icons-material/LeaderboardOutlined';
+import SettingsIcon from '@mui/icons-material/Settings';
 
 const Navbar = () => {
     const flexContainer = {
@@ -18,16 +22,22 @@ const Navbar = () => {
         fontWeight: 'bold',
     };
 
+    const iconStyle = {
+        cursor: 'pointer',
+    };
+
     return (
         <div style={flexContainer}>
             <div style={flexStyle}>
-                <div>icon</div>
-                <div>icon</div>
+                <MenuIcon sx={iconStyle} />
+                <div style={{ width: 10 }} />
+                <HelpOutlineOutlinedIcon sx={iconStyle} />
             </div>
             <div style={title}>Wordle</div>
             <div style={flexStyle}>
-                <div>icon</div>
-                <div>icon</div>
+                <LeaderboardOutlinedIcon sx={iconStyle} />
+                <div style={{ width: 10 }} />
+                <SettingsIcon sx={iconStyle} />
             </div>
         </div>
     );
