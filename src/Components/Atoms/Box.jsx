@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAppContext } from '../../Context/AppContext';
 
 const Box = (props) => {
-    const { letter, position, rowNum } = props;
+    const { letter, position, rowNum, animDelay } = props;
     const { previousGuesses, wordToGuess, colors } = useAppContext();
     const [bgColor, setBgColor] = useState('default');
 
@@ -22,16 +22,15 @@ const Box = (props) => {
 
     const absolute = {
         // to center absolute box
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
+        // position: 'absolute',
+        // top: '50%',
+        // left: '50%',
+        // transform: 'translate(-50%, -50%)',
         color: '#FFFFFF',
         fontSize: 40,
         textTransform: 'uppercase',
         fontWeight: 'bold',
         userSelect: 'none',
-        backgroundColor: previousGuesses[rowNum] ? colors[bgColor] : null,
 
         // to center text in box
         display: 'flex',
@@ -44,9 +43,21 @@ const Box = (props) => {
         height: '100%',
     };
 
+    const anim = {
+        animationDelay: animDelay,
+        backgroundColor: previousGuesses[rowNum] ? colors[bgColor] : null,
+        transition: 'background-color 2s',
+        transitionDelay: animDelay,
+    };
+
     return (
         <div style={container}>
-            <div className={letter ? 'letter-entered' : null} style={absolute}>
+            <div
+                className={
+                    previousGuesses[rowNum] ? 'guess-entered' : letter ? 'letter-entered' : null
+                }
+                style={previousGuesses[rowNum] ? { ...absolute, ...anim } : absolute}
+            >
                 {letter}
             </div>
         </div>
