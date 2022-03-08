@@ -40,19 +40,36 @@ export const AppContextProvider = ({ children }) => {
     };
 
     const handleEnter = () => {
-        if (myGuess.length === 5 && currentRow < 7) {
+        if (myGuess.length === 5 && currentRow < 6) {
             setPreviousGuesses([...previousGuesses, myGuess]);
             setMyGuess('');
             setCurrentRow(currentRow + 1);
         }
 
+        // invalid condition
         if (myGuess.length < 5) {
             setIsInvalid(true);
             setTimeout(() => {
                 setIsInvalid(false);
             }, 1000);
         }
+
+        // win condition
+        if (myGuess === wordToGuess) {
+            setTimeout(() => {
+                alert('win');
+            }, 4000);
+        }
+
+        // lose condition
+        if (currentRow === 5 && myGuess !== wordToGuess) {
+            setTimeout(() => {
+                alert('lose');
+            }, 4000);
+        }
     };
+
+    console.log(currentRow);
 
     const handleAlphabet = () => {
         if (myGuess.length < 5) {
