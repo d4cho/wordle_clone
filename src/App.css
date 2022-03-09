@@ -8,6 +8,7 @@
     margin: 0 auto;
     background-color: black;
     color: #ffffff;
+    height: 100vh;
 }
 
 .letter-entered {

@@ -19,6 +19,7 @@ export const AppContextProvider = ({ children }) => {
         green: '#538D4E',
         dark: '#3A3A3C',
     });
+    const [gameResult, setGameResult] = useState(null);
 
     const keyPressed = useKeyPress();
 
@@ -57,19 +58,17 @@ export const AppContextProvider = ({ children }) => {
         // win condition
         if (myGuess === wordToGuess) {
             setTimeout(() => {
-                alert('win');
+                setGameResult('win');
             }, 4000);
         }
 
         // lose condition
         if (currentRow === 5 && myGuess !== wordToGuess) {
             setTimeout(() => {
-                alert('lose');
+                setGameResult('lose');
             }, 4000);
         }
     };
-
-    console.log(currentRow);
 
     const handleAlphabet = () => {
         if (myGuess.length < 5) {
@@ -92,6 +91,8 @@ export const AppContextProvider = ({ children }) => {
                 isInvalid,
                 colors,
                 setColors,
+                gameResult,
+                setGameResult,
             }}
         >
             {children}
