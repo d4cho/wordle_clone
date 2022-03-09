@@ -14,9 +14,11 @@ const KeyboardLetter = (props) => {
                 // if letter is already green, don't check and change color
                 if (bgColor !== 'green') {
                     // only check and change letter of component
-                    if (letter === letterToCheck) {
-                        if (wordToGuess.includes(letterToCheck)) {
-                            if (wordToGuess.indexOf(letterToCheck) === i) {
+                    if (letter.toUpperCase() === letterToCheck.toUpperCase()) {
+                        if (wordToGuess.toUpperCase().includes(letterToCheck.toUpperCase())) {
+                            if (
+                                wordToGuess.toUpperCase().indexOf(letterToCheck.toUpperCase()) === i
+                            ) {
                                 setBgColor('green');
                             } else {
                                 setBgColor('yellow');

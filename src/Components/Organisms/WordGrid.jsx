@@ -38,7 +38,7 @@ const WordGrid = () => {
         <div style={container}>
             {isInvalid && (
                 <div className='invalid-fade-out' style={absolute}>
-                    Not enough letters
+                    {isInvalid}
                 </div>
             )}
             <div style={gridContainer}>

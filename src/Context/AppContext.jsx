@@ -1,5 +1,8 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useKeyPress } from '../Utils/Hooks';
+import { words } from '../Assets/words';
+import dictionary from '../Assets/dictionary.json';
+import { WorkOutlined } from '@mui/icons-material';
 
 const AppContext = createContext();
 
@@ -12,7 +15,7 @@ export const AppContextProvider = ({ children }) => {
     const [myGuess, setMyGuess] = useState('');
     const [currentRow, setCurrentRow] = useState(0);
     const [previousGuesses, setPreviousGuesses] = useState([]);
-    const [isInvalid, setIsInvalid] = useState(false);
+    const [isInvalid, setIsInvalid] = useState(null);
     const [colors, setColors] = useState({
         default: '#818384',
         yellow: '#B59F3B',
@@ -20,6 +23,16 @@ export const AppContextProvider = ({ children }) => {
         dark: '#3A3A3C',
     });
     const [gameResult, setGameResult] = useState(null);
+
+    const dictionaryWords = Object.keys(dictionary);
+    // .filter((word) => word.length === 5 || word.length === 4)
+    // .map((word) => {
+    //     if (word.length === 4) {
+    //         return word + 's';
+    //     } else {
+    //         return word;
+    //     }
+    // });
 
     const keyPressed = useKeyPress();
 
@@ -35,38 +48,54 @@ export const AppContextProvider = ({ children }) => {
         }
     }, [keyPressed]);
 
+    useEffect(() => {
+        let randomNum = Math.floor(Math.random() * (words.length + 1));
+        const newWord = words[randomNum];
+        if (newWord) {
+            console.log(newWord);
+            setWordToGuess(newWord);
+        }
+    }, []);
+
     const handleBackspace = () => {
         let guess = myGuess.substring(0, myGuess.length - 1);
         setMyGuess(guess);
     };
 
     const handleEnter = () => {
-        if (myGuess.length === 5 && currentRow < 6) {
-            setPreviousGuesses([...previousGuesses, myGuess]);
-            setMyGuess('');
-            setCurrentRow(currentRow + 1);
-        }
-
         // invalid condition
         if (myGuess.length < 5) {
-            setIsInvalid(true);
+            setIsInvalid('Not enough letters');
             setTimeout(() => {
-                setIsInvalid(false);
+                setIsInvalid(null);
             }, 1000);
-        }
+        } else {
+            if (dictionaryWords.includes(myGuess)) {
+                if (myGuess.length === 5 && currentRow < 6) {
+                    setPreviousGuesses([...previousGuesses, myGuess]);
+                    setMyGuess('');
+                    setCurrentRow(currentRow + 1);
+                }
 
-        // win condition
-        if (myGuess === wordToGuess) {
-            setTimeout(() => {
-                setGameResult('win');
-            }, 4000);
-        }
+                // win condition
+                if (myGuess.toUpperCase() === wordToGuess.toUpperCase()) {
+                    setTimeout(() => {
+                        setGameResult('win');
+                    }, 4000);
+                }
 
-        // lose condition
-        if (currentRow === 5 && myGuess !== wordToGuess) {
-            setTimeout(() => {
-                setGameResult('lose');
-            }, 4000);
+                // lose condition
+                if (currentRow === 5 && myGuess.toUpperCase() !== wordToGuess.toUpperCase()) {
+                    setTimeout(() => {
+                        setGameResult('lose');
+                    }, 4000);
+                }
+            } else {
+                setIsInvalid('Not in word list');
+                setTimeout(() => {
+                    setIsInvalid(null);
+                }, 1000);
+            }
         }
     };
 
