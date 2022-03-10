@@ -1,8 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { useKeyPress } from '../Utils/Hooks';
 import { words } from '../Assets/words';
-import dictionary from '../Assets/dictionary.json';
-import { WorkOutlined } from '@mui/icons-material';
 
 const AppContext = createContext();
 
@@ -24,16 +22,6 @@ export const AppContextProvider = ({ children }) => {
     });
     const [gameResult, setGameResult] = useState(null);
 
-    const dictionaryWords = Object.keys(dictionary);
-    // .filter((word) => word.length === 5 || word.length === 4)
-    // .map((word) => {
-    //     if (word.length === 4) {
-    //         return word + 's';
-    //     } else {
-    //         return word;
-    //     }
-    // });
-
     const keyPressed = useKeyPress();
 
     useEffect(() => {
@@ -50,9 +38,9 @@ export const AppContextProvider = ({ children }) => {
 
     useEffect(() => {
         let randomNum = Math.floor(Math.random() * (words.length + 1));
-        const newWord = words[randomNum];
+        const newWord = words[randomNum].toUpperCase();
         if (newWord) {
-            console.log(newWord);
+            // console.log(newWord);
             setWordToGuess(newWord);
         }
     }, []);
@@ -70,38 +58,50 @@ export const AppContextProvider = ({ children }) => {
                 setIsInvalid(null);
             }, 1000);
         } else {
-            if (dictionaryWords.includes(myGuess)) {
-                if (myGuess.length === 5 && currentRow < 6) {
-                    setPreviousGuesses([...previousGuesses, myGuess]);
-                    setMyGuess('');
-                    setCurrentRow(currentRow + 1);
-                }
+            // dictionary api call here (https://dictionaryapi.dev/)
+            fetch(`https://api.dictionaryapi.dev/api/v2/entries/en/${myGuess}`)
+                .then((res) => {
+                    if (res.status === 200) {
+                        // is a valid word
+                        if (myGuess.length === 5 && currentRow < 6) {
+                            setPreviousGuesses([...previousGuesses, myGuess]);
+                            setMyGuess('');
+                            setCurrentRow(currentRow + 1);
+                        }
 
-                // win condition
-                if (myGuess.toUpperCase() === wordToGuess.toUpperCase()) {
-                    setTimeout(() => {
-                        setGameResult('win');
-                    }, 4000);
-                }
+                        // win condition
+                        if (myGuess.toUpperCase() === wordToGuess.toUpperCase()) {
+                            setTimeout(() => {
+                                setGameResult('win');
+                            }, 4000);
+                        }
 
-                // lose condition
-                if (currentRow === 5 && myGuess.toUpperCase() !== wordToGuess.toUpperCase()) {
-                    setTimeout(() => {
-                        setGameResult('lose');
-                    }, 4000);
-                }
-            } else {
-                setIsInvalid('Not in word list');
-                setTimeout(() => {
-                    setIsInvalid(null);
-                }, 1000);
-            }
+                        // lose condition
+                        if (
+                            currentRow === 5 &&
+                            myGuess.toUpperCase() !== wordToGuess.toUpperCase()
+                        ) {
+                            setTimeout(() => {
+                                setGameResult('lose');
+                            }, 4000);
+                        }
+                    } else {
+                        // is not a valid word
+                        setIsInvalid('Not in word list');
+                        setTimeout(() => {
+                            setIsInvalid(null);
+                        }, 1000);
+                    }
+                    return res.json();
+                })
+                // .then((data) => console.log('data', data))
+                .catch((err) => alert('API call failed. Try again.'));
         }
     };
 
     const handleAlphabet = () => {
         if (myGuess.length < 5) {
-            let guess = myGuess + keyPressed;
+            let guess = (myGuess + keyPressed).toUpperCase();
             setMyGuess(guess);
         }
     };
