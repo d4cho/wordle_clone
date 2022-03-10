@@ -1,8 +1,11 @@
 import React from 'react';
 import KeyboardLetter from '../Atoms/KeyboardLetter';
 import BackspaceIcon from '@mui/icons-material/Backspace';
+import { useAppContext } from '../../Context/AppContext';
 
 const KeyboardLayout = () => {
+    const { myGuess, setMyGuess, handleEnter } = useAppContext();
+
     const gridContainer = {
         width: 600,
         margin: '0 auto',
@@ -58,42 +61,56 @@ const KeyboardLayout = () => {
         alignItems: 'center',
     };
 
+    const onLetterClick = (letter) => {
+        if (myGuess.length < 5) {
+            let guess = (myGuess + letter).toUpperCase();
+            setMyGuess(guess);
+        }
+    };
+
+    const onBackspaceClick = () => {
+        let guess = myGuess.substring(0, myGuess.length - 1);
+        setMyGuess(guess);
+    };
+
     return (
         <div>
             <div style={gridContainer}>
                 <div style={row1Container}>
-                    <KeyboardLetter letter={'q'} />
-                    <KeyboardLetter letter={'w'} />
-                    <KeyboardLetter letter={'e'} />
-                    <KeyboardLetter letter={'r'} />
-                    <KeyboardLetter letter={'t'} />
-                    <KeyboardLetter letter={'y'} />
-                    <KeyboardLetter letter={'u'} />
-                    <KeyboardLetter letter={'i'} />
-                    <KeyboardLetter letter={'o'} />
-                    <KeyboardLetter letter={'p'} />
+                    <KeyboardLetter letter={'q'} onLetterClick={onLetterClick} />
+                    <KeyboardLetter letter={'w'} onLetterClick={onLetterClick} />
+                    <KeyboardLetter letter={'e'} onLetterClick={onLetterClick} />
+                    <KeyboardLetter letter={'r'} onLetterClick={onLetterClick} />
+                    <KeyboardLetter letter={'t'} onLetterClick={onLetterClick} />
+                    <KeyboardLetter letter={'y'} onLetterClick={onLetterClick} />
+                    <KeyboardLetter letter={'u'} onLetterClick={onLetterClick} />
+                    <KeyboardLetter letter={'i'} onLetterClick={onLetterClick} />
+                    <KeyboardLetter letter={'o'} onLetterClick={onLetterClick} />
+                    <KeyboardLetter letter={'p'} onLetterClick={onLetterClick} />
                 </div>
                 <div style={row2Container}>
-                    <KeyboardLetter letter={'a'} />
-                    <KeyboardLetter letter={'s'} />
-                    <KeyboardLetter letter={'d'} />
-                    <KeyboardLetter letter={'f'} />
-                    <KeyboardLetter letter={'g'} />
-                    <KeyboardLetter letter={'h'} />
-                    <KeyboardLetter letter={'j'} />
-                    <KeyboardLetter letter={'k'} />
-                    <KeyboardLetter letter={'l'} />
+                    <KeyboardLetter letter={'a'} onLetterClick={onLetterClick} />
+                    <KeyboardLetter letter={'s'} onLetterClick={onLetterClick} />
+                    <KeyboardLetter letter={'d'} onLetterClick={onLetterClick} />
+                    <KeyboardLetter letter={'f'} onLetterClick={onLetterClick} />
+                    <KeyboardLetter letter={'g'} onLetterClick={onLetterClick} />
+                    <KeyboardLetter letter={'h'} onLetterClick={onLetterClick} />
+                    <KeyboardLetter letter={'j'} onLetterClick={onLetterClick} />
+                    <KeyboardLetter letter={'k'} onLetterClick={onLetterClick} />
+                    <KeyboardLetter letter={'l'} onLetterClick={onLetterClick} />
                 </div>
                 <div style={row3Container}>
-                    <div style={item}>ENTER</div>
-                    <KeyboardLetter letter={'z'} />
-                    <KeyboardLetter letter={'x'} />
-                    <KeyboardLetter letter={'c'} />
-                    <KeyboardLetter letter={'v'} />
-                    <KeyboardLetter letter={'b'} />
-                    <KeyboardLetter letter={'n'} />
-                    <KeyboardLetter letter={'m'} />
-                    <div style={backspace}>
+                    <div style={item} onClick={() => handleEnter()}>
+                        ENTER
+                    </div>
+                    <KeyboardLetter letter={'z'} onLetterClick={onLetterClick} />
+                    <KeyboardLetter letter={'x'} onLetterClick={onLetterClick} />
+                    <KeyboardLetter letter={'c'} onLetterClick={onLetterClick} />
+                    <KeyboardLetter letter={'v'} onLetterClick={onLetterClick} />
+                    <KeyboardLetter letter={'b'} onLetterClick={onLetterClick} />
+                    <KeyboardLetter letter={'n'} onLetterClick={onLetterClick} />
+                    <KeyboardLetter letter={'m'} onLetterClick={onLetterClick} />
+                    <div style={backspace} onClick={() => onBackspaceClick()}>
                         <BackspaceIcon sx={{ fontSize: 35 }} />
                     </div>
                 </div>

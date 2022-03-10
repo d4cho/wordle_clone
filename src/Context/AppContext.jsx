@@ -122,6 +122,7 @@ export const AppContextProvider = ({ children }) => {
                 setColors,
                 gameResult,
                 setGameResult,
+                handleEnter,
             }}
         >
             {children}

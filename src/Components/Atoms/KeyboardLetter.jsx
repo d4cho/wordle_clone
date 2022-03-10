@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useAppContext } from '../../Context/AppContext';
 
 const KeyboardLetter = (props) => {
-    const { letter } = props;
+    const { letter, onLetterClick } = props;
     const { previousGuesses, wordToGuess, colors } = useAppContext();
     const [bgColor, setBgColor] = useState('default');
 
@@ -42,7 +42,11 @@ const KeyboardLetter = (props) => {
         cursor: 'pointer',
         userSelect: 'none',
     };
-    return <div style={itemStyle}>{letter}</div>;
+    return (
+        <div style={itemStyle} onClick={() => onLetterClick(letter)}>
+            {letter}
+        </div>
+    );
 };
 
 export default KeyboardLetter;
